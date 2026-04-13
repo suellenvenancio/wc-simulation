@@ -78,7 +78,7 @@ export default function NationalTeamPage() {
 
   const onSaveTeam = async (formation: string) => {
     if (selectedTeam && user) {
-      const defaultTeam = await createOrUpdateDefaultLineup({
+      await createOrUpdateDefaultLineup({
         userId: user.id,
         formation,
         players: lineup.map((l) => {
@@ -142,7 +142,7 @@ export default function NationalTeamPage() {
             >
               <p
                 key={group.id}
-                className={mergeCn("glass-card p-3 w-22 text-sm", {
+                className={mergeCn("glass-card p-3 w-20 text-sm", {
                   "border-neon": selectedGroup?.id === group.id,
                 })}
               >
@@ -221,8 +221,8 @@ function GroupStandings({
                         src={team.flag}
                         alt={team.name}
                         width={20}
-                        height={18}
-                        className="inline-block mr-2 max-h-12"
+                        height={20}
+                        className="inline-block mr-2 max-h-10 object-contain"
                       />
                     )}
 
