@@ -1,4 +1,4 @@
-import PlayerService from '@/service/player.service'
+import PlayerService from "@/service/player.service"
 
 export function usePlayer() {
   async function getPlayersByTeamId(teamId: number) {

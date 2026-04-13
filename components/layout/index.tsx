@@ -1,11 +1,11 @@
-import Header from '../header'
-import Sidebar from '../sidebar'
+import Header from "../header"
+import Sidebar from "../sidebar"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className='w-full flex m-6'>
+    <main className="w-full flex m-6">
       <Sidebar />
-      <div className='w-full'>
+      <div className="w-full">
         <Header />
         {children}
       </div>

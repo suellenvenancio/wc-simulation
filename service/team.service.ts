@@ -1,12 +1,12 @@
-import client from '@/utils/client'
+import client from "@/utils/client"
 
 const TeamService = {
   async getTeamsByGroupId(groupId: number) {
-    const response = await client.get(`/teams?groupId=${groupId}`)
+    const response = await client.get(`/team/group/${groupId}`)
     return response.data
   },
-  async getTeamsByChampionshipId(championshipId: number) {
-    const response = await client.get(`/teams?championshipId=${championshipId}`)
+  async getTeamsByTournamentId(tournamentId: number) {
+    const response = await client.get(`/team/tournament/${tournamentId}`)
     return response.data
   },
 }

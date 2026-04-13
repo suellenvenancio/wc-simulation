@@ -1,5 +1,5 @@
 "use client"
-import Layout from "@/components/layout"
+import { Layout } from "@/components/layout"
 import { MatchCard } from "@/components/matchCard"
 import { useMatch } from "@/hooks/use-match"
 

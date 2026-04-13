@@ -1,9 +1,9 @@
 "use client"
 import { Button } from "@/components/button"
-import Layout from "@/components/layout"
+import { Layout } from "@/components/layout"
 import { SquadComponent } from "@/components/squad"
 import { type FormationKey, TacticalField } from "@/components/tacticalField"
-import { usePrompt } from "@/hooks/use-prompt"
+import { useSimulate } from "@/hooks/use-simulate"
 import { useTeam } from "@/hooks/use-team"
 import { type Player, Position, PromptName, type Team } from "@/types"
 import { mergeCn } from "@/utils/cn"
@@ -16,6 +16,7 @@ export default function SimulatePage() {
 
   const homeTeamId = params.homeTeamId as string
   const awayTeamId = params.awayTeamId as string
+  const matchId = params.matchId as string
 
   const [selectedPositionHomeTeam, setSelectedPositionHomeTeam] =
     useState<Position>(Position.All)
@@ -44,7 +45,7 @@ export default function SimulatePage() {
   const [formationAwayTeam, setFormationAwayTeam] =
     useState<FormationKey>("4-4-2")
 
-  const { simulateMatch } = usePrompt()
+  const { simulateMatch } = useSimulate()
 
   const homeTeam = teams.find((team) => team.id === Number(homeTeamId))
   const awayTeam = teams.find((team) => team.id === Number(awayTeamId))
@@ -131,6 +132,7 @@ export default function SimulatePage() {
       tacticAwayTeam: formationAwayTeam,
       homeTeamPlayers: lineupHomeTeam.map((l) => l.player.name),
       awayTeamPlayers: lineupAwayTeam.map((l) => l.player.name),
+      matchId: Number(matchId),
     })
   }
 

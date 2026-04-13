@@ -1,34 +1,32 @@
-import client from '@/utils/client'
+import client from "@/utils/client"
 
 const MatchService = {
   async getMatches() {
-    const response = await client.get('/matches')
-    return response.data
+    const response = await client.get("/match")
+    return response
   },
-  async getMatchesByChampionshipId(championshipId: number) {
-    const response = await client.get(
-      `/matches?championshipId=${championshipId}`,
-    )
+  async getMatchesByTournamentId(tournamentId: number) {
+    const response = await client.get(`/match/tournament/${tournamentId}`)
     return response.data
   },
   async getMatchesByStadiumId(stadiumId: number) {
-    const response = await client.get(`/matches?stadiumId=${stadiumId}`)
+    const response = await client.get(`/match/stadium/${stadiumId}`)
     return response.data
   },
   async getMatchesByHomeTeamId(homeTeamId: number) {
-    const response = await client.get(`/matches?homeTeamId=${homeTeamId}`)
+    const response = await client.get(`/match/homeTeam/${homeTeamId}`)
     return response.data
   },
   async getMatchesByAwayTeamId(awayTeamId: number) {
-    const response = await client.get(`/matches?awayTeamId=${awayTeamId}`)
+    const response = await client.get(`/match/awayTeam/${awayTeamId}`)
     return response.data
   },
   async getMatchById(id: number) {
-    const response = await client.get(`/matches/${id}`)
+    const response = await client.get(`/match/${id}`)
     return response.data
   },
   async getMatchByGroupId(groupId: number) {
-    const response = await client.get(`/matches?groupId=${groupId}`)
+    const response = await client.get(`/match/group/${groupId}`)
     return response.data
   },
 }

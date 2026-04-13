@@ -1,6 +1,6 @@
-import promptService from "@/service/prompt.service"
+import simulateService from "@/service/simulate.service"
 
-export const usePrompt = () => {
+export const useSimulate = () => {
   const simulateMatch = async ({
     promptName,
     awayTeam,
@@ -20,7 +20,7 @@ export const usePrompt = () => {
     tacticAwayTeam: string
     matchId: number
   }) => {
-    const response = await promptService.simulateMatch({
+    const response = await simulateService.simulateMatch({
       promptName,
       homeTeam,
       awayTeam,
@@ -45,7 +45,7 @@ export const usePrompt = () => {
     teamPlayers: string[]
     userTacticId: number
   }) => {
-    const response = await promptService.simulateDefaultTeam({
+    const response = await simulateService.simulateDefaultTeam({
       promptName,
       tactic,
       teamName,

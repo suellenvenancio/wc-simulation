@@ -1,8 +1,8 @@
-'use-client'
+"use-client"
 
-import { simulateService } from '@/service/simulate.service'
+import { simulateService } from "@/service/lineups"
 
-export function useSimulation() {
+export function useLineup() {
   const getDefaltLineupByTeam = async ({
     userId,
     teamId,

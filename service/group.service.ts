@@ -1,12 +1,10 @@
-import client from '@/utils/client'
+import client from "@/utils/client"
 
-const GroupService = {
-  async getGroupsByChampionshipId(championshipId: number) {
-    const response = await client.get(
-      `/groups?championshipId=${championshipId}`,
-    )
+const groupService = {
+  async getGroupsByTournamentId(tournamentId: number) {
+    const response = await client.get(`/group/tournament/${tournamentId}`)
     return response.data
   },
 }
 
-export default GroupService
+export default groupService

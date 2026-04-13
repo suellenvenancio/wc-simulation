@@ -1,26 +1,19 @@
 "use client"
 import { IconButton } from "@/components/iconButton"
 import { CloseIcon } from "@/components/icons/close"
-import Layout from "@/components/layout"
+import { Layout } from "@/components/layout"
 import { SquadComponent } from "@/components/squad"
 import { TacticalField } from "@/components/tacticalField"
 import { useAuth } from "@/context/auth"
 import { useGroups } from "@/hooks/use-groups"
-import { usePrompt } from "@/hooks/use-prompt"
-import { useSimulation } from "@/hooks/use-simulation"
-import {
-  type Group,
-  type Player,
-  Position,
-  PromptName,
-  type Team,
-} from "@/types"
+import { useLineup } from "@/hooks/use-lineup"
+import { type Group, type Player, Position, type Team } from "@/types"
 import { mergeCn } from "@/utils/cn"
 import Image from "next/image"
 import { useCallback, useEffect, useState } from "react"
 
 export default function NationalTeamPage() {
-  const { createOrUpdateDefaultLineup, getDefaltLineupByTeam } = useSimulation()
+  const { createOrUpdateDefaultLineup, getDefaltLineupByTeam } = useLineup()
   const { groups } = useGroups()
   const { user } = useAuth()
 
@@ -37,10 +30,6 @@ export default function NationalTeamPage() {
     { player: Player; positionIndex: number }[]
   >([])
   const [formation, setFormation] = useState()
-  const [promptResponse, setPromptResponse] = useState<string>()
-  const [showModal, setShowModal] = useState(false)
-
-  const { simulateDefaultTeam } = usePrompt()
 
   const handleSelectPlayer = (player: Player) => {
     setSelectedPlayer(player)
@@ -97,16 +86,6 @@ export default function NationalTeamPage() {
         }),
         teamId: selectedTeam?.id,
       })
-
-      const response = await simulateDefaultTeam({
-        promptName: PromptName.DEFAULT_LINEUP,
-        tactic: formation,
-        teamName: selectedTeam?.name || "",
-        teamPlayers: lineup.map((l) => l.player.name),
-        userTacticId: defaultTeam.id,
-      })
-      setPromptResponse(response.response)
-      setShowModal(true)
     }
   }
 
@@ -141,6 +120,7 @@ export default function NationalTeamPage() {
   }, [selectedTeam, user])
 
   const onSelectGroup = (group: Group) => {
+    console.log(group)
     setSelectedGroup(group)
     setSelectedTeam(undefined)
     setSelectedPlayer(null)
@@ -199,12 +179,6 @@ export default function NationalTeamPage() {
             className="w-200"
           />
         </div>
-        {showModal && promptResponse && (
-          <FeedBackModal
-            response={promptResponse}
-            onClose={() => setShowModal(false)}
-          />
-        )}
       </div>
     </Layout>
   )

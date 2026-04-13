@@ -1,57 +1,67 @@
 import client from "@/utils/client"
 
-export const simulateService = {
-  async createDefaultLineup({
-    userId,
-    teamId,
-    formation,
-    players,
+const simulateService = {
+  simulateMatch: async ({
+    promptName,
+    awayTeam,
+    homeTeam,
+    awayTeamPlayers,
+    homeTeamPlayers,
+    tacticAwayTeam,
+    tacticHomeTeam,
+    matchId,
   }: {
-    userId: string
-    teamId: number
-    formation: string
-    players: { playerId: number; positionIndex: number }[]
+    promptName: string
+    homeTeam: string
+    awayTeam: string
+    homeTeamPlayers: string[]
+    awayTeamPlayers: string[]
+    tacticHomeTeam: string
+    tacticAwayTeam: string
+    matchId: number
+  }) => {
+    const response = await client.post("/simulate/match", {
+      promptName,
+      homeTeam,
+      awayTeam,
+      homeTeamPlayers,
+      awayTeamPlayers,
+      tacticHomeTeam,
+      tacticAwayTeam,
+      matchId,
+    })
+    return response
+  },
+  simulateDefaultTeam: async ({
+    promptName,
+    tactic,
+    teamName,
+    teamPlayers,
+    userTacticId,
+  }: {
+    promptName: string
+    tactic: string
+    teamName: string
+    teamPlayers: string[]
+    userTacticId: number
   }): Promise<{
     id: number
-    formation: string
-    userId: string
-    teamId: number
-  }> {
-    return await client.post("simulate/lineup/default", {
-      userId,
-      teamId,
-      formation,
-      players,
-    })
-  },
-  async getDefaultLineup({
-    userId,
-    teamId,
-  }: {
-    userId: string
-    teamId: number
-  }) {
-    return await client.get(`simulate/lineup/user/${userId}/team/${teamId}`)
-  },
-  async createOrUpdateLineup({
-    userId,
-    teamId,
-    formation,
-    matchId,
-    players,
-  }: {
-    userId: string
-    teamId: number
-    formation: string
-    matchId: number
-    players: { playerId: number; positionIndex: number }[]
-  }) {
-    return await client.post("simulation/lineup", {
-      userId,
-      teamId,
-      formation,
-      matchId,
-      players,
+    promptId: number
+    sentPrompt: string
+    response: string
+    userTacticId: number
+    matchLineupId: number | null
+    matchId: number | null
+    createdAt: string
+  }> => {
+    return await client.post("/simulate/team", {
+      promptName,
+      tactic,
+      teamName,
+      teamPlayers,
+      userTacticId,
     })
   },
 }
+
+export default simulateService
