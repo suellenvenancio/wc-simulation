@@ -6,7 +6,7 @@ import { GroupsIcon } from "../icons/groups"
 
 export default function Sidebar() {
   return (
-    <aside className="w-18 h-40 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl m-6 p-2 flex flex-col gap-2 mt-42">
+    <aside className="w-18 h-36 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl m-6 p-2 flex flex-col gap-2 mt-42">
       <NavItem icon={<GroupsIcon />} path="/" />
       <NavItem icon={<BallIcon />} path="/matches" />
     </aside>

@@ -8,7 +8,7 @@ import { useTeam } from "@/hooks/use-team"
 import { type Player, Position, PromptName, type Team } from "@/types"
 import { mergeCn } from "@/utils/cn"
 import { useParams } from "next/navigation"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 export default function SimulatePage() {
   const { teams } = useTeam()
@@ -46,9 +46,13 @@ export default function SimulatePage() {
     useState<FormationKey>("4-4-2")
 
   const { simulateMatch } = useSimulate()
-
-  const homeTeam = teams.find((team) => team.id === Number(homeTeamId))
-  const awayTeam = teams.find((team) => team.id === Number(awayTeamId))
+  console.log(teams)
+  const homeTeam = useMemo(() => {
+    return teams.find((team) => Number(team.id) === Number(homeTeamId))
+  }, [teams, homeTeamId])
+  const awayTeam = useMemo(() => {
+    return teams.find((team) => Number(team.id) === Number(awayTeamId))
+  }, [teams, awayTeamId])
 
   const handlePositionHomeTeam = useCallback((position: Position) => {
     setSelectedPositionHomeTeam(position)

@@ -13,6 +13,7 @@ export default function MatchesPage() {
         {matches.map((match) => (
           <div key={match.id} className="flex items-center gap-2 m-2">
             <MatchCard
+              matchId={match.id}
               homeTeam={match.homeTeam}
               awayTeam={match.awayTeam}
               matchDate={match.matchDate}
